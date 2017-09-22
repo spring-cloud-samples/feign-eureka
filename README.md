@@ -42,3 +42,20 @@ It should go away shortly.
 run `java -jar server/target/feign-eureka-hello-server-0.0.1-SNAPSHOT.jar --server.port=7112`
 
 Go back to [http://localhost:7211](http://localhost:7211) and you should see both ports `7111` and `7112` in the output after a minute or two as you keep refreshing.
+
+
+# load or circuit breakers test
+
+  down load and install jmeter http://jmeter.apache.org/download_jmeter.cgi
+  
+  to evaluate/execute test
+  
+  run the eureka
+  run the client one instance
+  runt the server (2 instaces)
+    
+  run the jmter script `JVM_ARGS="-Xms5120m -Xmx5120m"  $JMETER_HOME/bin/jmeter -n -t FeignLoad.jmx -l log.jtl -Jusers=2000 -Jduration=120 -e -o out`
+  
+  in middle of the test stop one of the server and oberser the errors
+  
+  

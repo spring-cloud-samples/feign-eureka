@@ -1,5 +1,7 @@
 package demo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,8 +23,15 @@ public class HelloServerApplication {
 
 	@RequestMapping("/")
 	public String hello() {
-		ServiceInstance localInstance = client.getLocalServiceInstance();
-		return "Hello World: "+ localInstance.getServiceId()+":"+localInstance.getHost()+":"+localInstance.getPort();
+	    StringBuilder result = new StringBuilder("Hello World: ");
+	    List<String> services = client.getServices();
+	    for(String serviceId: services) {
+	        List<ServiceInstance> localInstances = client.getInstances(serviceId);
+	        for(ServiceInstance instance: localInstances) {
+	            result.append(instance.getServiceId()+":"+instance.getHost()+":"+instance.getPort());
+	        }
+	    }
+		return result.toString();
 	}
 
 	public static void main(String[] args) {

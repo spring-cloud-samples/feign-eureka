@@ -1,25 +1,50 @@
+info:
+  version: 1.0.0
+
 spring:
   application:
     name: HelloClient
+  cloud:
+    inetutils:
+      default-hostname: hello.client
 
 server:
   port: 7211
 
 eureka:
-  password: password
   client:
     serviceUrl:
-      defaultZone: http://user:${eureka.password}@localhost:8761/eureka/
+      defaultZone: http://192.168.5.181:8761/eureka,http://10.20.0.61:8761/eureka
   instance:
     leaseRenewalIntervalInSeconds: 10
     metadataMap:
       instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+    prefer-ip-address: true
+#    ip-address: 192.168.6.132
+    hostname: hello.client
+    instance-id: ${eureka.instance.hostname}:${spring.application.name}:${server.port}
 
+management:
+  endpoint:
+    restart:
+      enabled: true
+    shutdown:
+      enabled: true
+    health:
+      enabled: true
 
-endpoints:
-  restart:
-    enabled: true
-  shutdown:
-    enabled: true
-  health:
-    sensitive: false
+feign:
+  httpclient:
+    max-connections: 4
+    max-connections-per-route: 1
+    connection-timeout: 2000
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true
+
+logging:
+  level:
+    com:
+      netflix: debug

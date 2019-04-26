@@ -27,8 +27,8 @@ feign:
   hystrix:
     enabled: true
   httpclient:
-    max-connections: 1
-    max-connections-per-route: 1
+    max-connections: 200
+    max-connections-per-route: 50
     connection-timeout: 2000
   compression:
     request:

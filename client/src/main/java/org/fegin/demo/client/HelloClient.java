@@ -9,7 +9,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  * @author steel
  * @datetime 2019/4/26 15:55
  */
-@FeignClient(name = "HelloServer", fallback = HystrixClientFallback.class)
+@FeignClient(name = "HelloServer", fallbackFactory = HelloClientFallbackFactory.class)
 public interface HelloClient {
     @RequestMapping(value = "/", method = GET)
     String hello();

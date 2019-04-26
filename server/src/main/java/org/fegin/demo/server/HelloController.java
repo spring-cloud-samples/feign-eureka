@@ -2,6 +2,7 @@ package org.fegin.demo.server;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,8 @@ public class HelloController {
     }
 
     @RequestMapping("/")
-    public String hello() throws JsonProcessingException {
+    public String hello() throws JsonProcessingException, InterruptedException {
+        Thread.sleep(RandomUtils.nextInt(2000));
         List<String> localInstance = discoveryClient.getServices();
         return "Hello World: "+ new ObjectMapper().writeValueAsString(localInstance);
     }

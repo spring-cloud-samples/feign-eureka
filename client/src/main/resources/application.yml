@@ -32,11 +32,16 @@ management:
       enabled: true
     health:
       enabled: true
-
+#    hystrix:
+#      config:
+#        execution:
+#          isolation:
+#            thread:
+#              timeoutInMilliseconds: 2000
 feign:
   httpclient:
-    max-connections: 1
-    max-connections-per-route: 1
+    max-connections: 200
+    max-connections-per-route: 50
     connection-timeout: 2000
   compression:
     request:
@@ -51,6 +56,22 @@ feign:
         loggerLevel: basic
   hystrix:
     enabled: true
+
+# 以配置hystrix超时时间为例
+hystrix:
+  command:
+    #默认的超时时间设置
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000
+    # commandKey，默认为方法名
+    hello:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000 #暂未生效，需要跟踪
 
 logging:
   level:

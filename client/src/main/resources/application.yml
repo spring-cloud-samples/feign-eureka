@@ -35,7 +35,7 @@ management:
 
 feign:
   httpclient:
-    max-connections: 4
+    max-connections: 1
     max-connections-per-route: 1
     connection-timeout: 2000
   compression:
@@ -43,6 +43,14 @@ feign:
       enabled: true
     response:
       enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+  hystrix:
+    enabled: true
 
 logging:
   level:

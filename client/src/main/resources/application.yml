@@ -32,12 +32,14 @@ management:
       enabled: true
     health:
       enabled: true
-#    hystrix:
-#      config:
-#        execution:
-#          isolation:
-#            thread:
-#              timeoutInMilliseconds: 2000
+    hystrix:
+      config:
+        default:
+          execution:
+            isolation:
+              thread:
+                timeoutInMilliseconds: 2000
+
 feign:
   httpclient:
     max-connections: 200
@@ -67,12 +69,13 @@ hystrix:
           thread:
             timeoutInMilliseconds: 1000
     # commandKey，默认为方法名
-    hello:
+    HelloClient#hello():
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 3000 #暂未生效，需要跟踪
+            timeoutInMilliseconds: 1500
 
+# logging
 logging:
   level:
     com:

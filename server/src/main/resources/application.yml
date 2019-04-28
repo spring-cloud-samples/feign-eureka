@@ -42,6 +42,21 @@ feign:
         readTimeout: 5000
         loggerLevel: basic
 
+management:
+  endpoint:
+    restart:
+      enabled: true
+    shutdown:
+      enabled: true
+    health:
+      enabled: true
+    hystrix:
+      config:
+        default:
+          execution:
+            isolation:
+              thread:
+                timeoutInMilliseconds: 2000
 logging:
   level:
     com:

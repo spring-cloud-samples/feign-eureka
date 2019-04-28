@@ -29,6 +29,14 @@
 		<hystrix.version>1.4.6.RELEASE</hystrix.version>
 	</properties>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+			<version>2.1.0.RELEASE</version>
+		</dependency>
+	</dependencies>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

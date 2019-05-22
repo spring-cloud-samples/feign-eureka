@@ -14,7 +14,7 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://192.168.5.181:8761/eureka,http://10.20.0.61:8761/eureka
+      defaultZone: https://user:${eureka.password}@localhost:8761/eureka/
   instance:
     leaseRenewalIntervalInSeconds: 10
     metadataMap:

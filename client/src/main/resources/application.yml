@@ -1,12 +1,17 @@
+info:
+  version: 1.0.0
+
 spring:
   application:
     name: HelloClient
+  cloud:
+    inetutils:
+      default-hostname: hello.client
 
 server:
   port: 7211
 
 eureka:
-  password: password
   client:
     serviceUrl:
       defaultZone: https://user:${eureka.password}@localhost:8761/eureka/
@@ -14,12 +19,64 @@ eureka:
     leaseRenewalIntervalInSeconds: 10
     metadataMap:
       instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+    prefer-ip-address: true
+#    ip-address: 192.168.6.132
+    hostname: hello.client
+    instance-id: ${eureka.instance.hostname}:${spring.application.name}:${server.port}
 
+management:
+  endpoint:
+    restart:
+      enabled: true
+    shutdown:
+      enabled: true
+    health:
+      enabled: true
+    hystrix:
+      config:
+        default:
+          execution:
+            isolation:
+              thread:
+                timeoutInMilliseconds: 2000
 
-endpoints:
-  restart:
+feign:
+  httpclient:
+    max-connections: 200
+    max-connections-per-route: 50
+    connection-timeout: 2000
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+  hystrix:
     enabled: true
-  shutdown:
-    enabled: true
-  health:
-    sensitive: false
+
+# 以配置hystrix超时时间为例
+hystrix:
+  command:
+    #默认的超时时间设置
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000
+    # commandKey，默认为方法名
+    HelloClient#hello():
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1500
+
+# logging
+logging:
+  level:
+    com:
+      netflix: debug

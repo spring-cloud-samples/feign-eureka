@@ -5,7 +5,7 @@ Assumes eureka (from [spring-cloud-samples](https://github.com/spring-cloud-samp
 
 ## building
 
-`mvn package`
+`mvnw package`
 
 ## hello server
 

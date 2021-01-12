@@ -23,21 +23,15 @@ verify it is functioning at [http://localhost:7211](http://localhost:7211)
 
 You should see `Hello World: HelloServer:myhostname:7111`
 
-### hellow client error
+### hello client error
 
-You may see an error while the eureka/ribbon caches warm up similar to the following:
+You may see an error while the eureka/loadbalancer caches warm up similar to the following:
 
-    Whitelabel Error Page
-
-    This application has no explicit mapping for /error, so you are seeing this as a fallback.
-
-    Wed Jan 07 13:13:39 MST 2015
-    There was an unexpected error (type=Internal Server Error, status=500).
-    com.netflix.client.ClientException: Load balancer does not have available server for client: HelloServer
+    Load balancer does not contain an instance for the service HelloServer
 
 It should go away shortly.
 
-## See round robin load balancing in action
+## See round robin load-balancing in action
 
 run `java -jar server/target/feign-eureka-hello-server-0.0.1-SNAPSHOT.jar --server.port=7112`
 

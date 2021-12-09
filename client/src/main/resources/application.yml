@@ -19,3 +19,7 @@ eureka:
 endpoints:
   restart:
     enabled: true
+
+feign:
+  okhttp:
+    enabled: true

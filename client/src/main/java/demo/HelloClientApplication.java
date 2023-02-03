@@ -31,7 +31,7 @@ public class HelloClientApplication {
 		SpringApplication.run(HelloClientApplication.class, args);
 	}
 
-	@FeignClient("HelloServer")
+    @FeignClient(name = "HelloServer", url = "${HelloServer.url}")
 	interface HelloClient {
 		@RequestMapping(value = "/", method = GET)
 		String hello();

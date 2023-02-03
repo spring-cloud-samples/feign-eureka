@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: HelloClient
+  cloud:
+    loadbalancer:
+
+HelloServer:
+  url: localhost:7333
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false

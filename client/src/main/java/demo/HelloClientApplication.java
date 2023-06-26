@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,6 +28,11 @@ public class HelloClientApplication {
 		return client.hello();
 	}
 
+	@RequestMapping("/test")
+	public String helloTest() {
+		return client.hello("testValue");
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(HelloClientApplication.class, args);
 	}
@@ -35,5 +41,8 @@ public class HelloClientApplication {
 	interface HelloClient {
 		@RequestMapping(value = "/", method = GET)
 		String hello();
+
+		@RequestMapping(value = "/{test}", method = GET)
+		String hello(@PathVariable String test);
 	}
 }

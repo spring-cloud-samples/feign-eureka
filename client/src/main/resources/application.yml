@@ -1,4 +1,11 @@
 spring:
+  cloud:
+    loadbalancer:
+      eager-load:
+        clients:
+          - HelloServer
+    refresh:
+      enabled: false
   application:
     name: HelloClient
 

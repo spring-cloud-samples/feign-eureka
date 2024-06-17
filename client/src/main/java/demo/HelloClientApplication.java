@@ -19,6 +19,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RestController
 @EnableFeignClients
 public class HelloClientApplication {
+
 	@Autowired
 	HelloClient client;
 

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableDiscoveryClient
 @RestController
 public class HelloServerApplication {
+
 	@Autowired
 	DiscoveryClient client;
 

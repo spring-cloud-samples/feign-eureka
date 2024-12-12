@@ -21,6 +21,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class HelloClientApplication {
 
 	@Autowired
+	@SuppressWarnings("SpringJavaAutowiringInspection")
 	HelloClient client;
 
 	@RequestMapping("/")
